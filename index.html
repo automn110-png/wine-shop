@@ -725,6 +725,20 @@
             </div>
           </a>
 
+        </div>
+
+        <!-- Load More Button -->
+        <div class="text-center mt-10" id="loadMoreWrap">
+          <button id="loadMoreBtn" class="btn-outline-gold text-gold-light px-10 py-3 rounded-full text-sm tracking-widest
+                         hover:text-white transition-colors">
+            查看更多臻品 →
+          </button>
+        </div>
+
+        <!-- Extra Products -->
+        <div id="extraProducts" style="display:none">
+          <div class="product-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mt-10">
+
           <!-- ====== 13. 奔富 Bin 389 ====== -->
           <a href="detail.html?id=benfu" data-category="红酒" class="card-glow bg-dark-card rounded-2xl overflow-hidden border border-dark-border group no-underline">
             <div class="relative overflow-hidden h-60 sm:h-64">
@@ -887,6 +901,7 @@
             </div>
           </a>
 
+          </div>
         </div>
 
       </div>
@@ -1054,7 +1069,9 @@
       var category = params.get('category');
       var tags = document.querySelectorAll('.category-tag');
       var products = document.getElementById('products');
-      var cards = document.querySelectorAll('.product-grid > a');
+      var cards = document.querySelectorAll('.product-grid a[data-category]');
+      var extraProducts = document.getElementById('extraProducts');
+      var loadMoreWrap = document.getElementById('loadMoreWrap');
 
       tags.forEach(function(tag) {
         tag.classList.remove('active');
@@ -1069,16 +1086,35 @@
       if (category) {
         if (heroBanner) heroBanner.style.display = 'none';
         if (products) products.style.display = 'block';
+
+        // show extra products for filtering
+        if (extraProducts) extraProducts.style.display = 'block';
+        // hide load more button on category pages
+        if (loadMoreWrap) loadMoreWrap.style.display = 'none';
+
         if (category !== '全部') {
           cards.forEach(function(card) {
             if (card.dataset.category !== category) {
               card.classList.add('hidden-card');
             }
           });
+        } else {
+          // on "全部" page, hide extra products until load more is clicked
+          if (extraProducts) extraProducts.style.display = 'none';
+          if (loadMoreWrap) loadMoreWrap.style.display = 'block';
         }
         if (products) products.scrollIntoView();
       } else {
         if (products) products.style.display = 'none';
+      }
+
+      // Load more button
+      var loadMoreBtn = document.getElementById('loadMoreBtn');
+      if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+          if (extraProducts) extraProducts.style.display = 'block';
+          if (loadMoreWrap) loadMoreWrap.style.display = 'none';
+        });
       }
     })();
 
