@@ -345,7 +345,7 @@
   <main class="flex-1">
 
     <!-- ========== Hero Banner ========== -->
-    <section class="hero-bg relative overflow-hidden">
+    <section id="heroBanner" class="hero-bg relative overflow-hidden">
       <div class="overlay-pattern absolute inset-0 pointer-events-none"></div>
       <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent"></div>
 
@@ -1064,7 +1064,10 @@
         }
       });
 
+      var heroBanner = document.getElementById('heroBanner');
+
       if (category) {
+        if (heroBanner) heroBanner.style.display = 'none';
         if (products) products.style.display = 'block';
         if (category !== '全部') {
           cards.forEach(function(card) {
