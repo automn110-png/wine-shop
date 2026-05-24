@@ -305,6 +305,7 @@
         <!-- Nav Tags -->
         <nav class="hidden lg:flex items-center gap-1">
           <a href="index.html" class="category-tag px-3 py-1.5 rounded-full text-sm border border-transparent text-gold font-semibold">首页</a>
+          <a href="index.html?category=全部" class="category-tag px-3 py-1.5 rounded-full text-sm border border-transparent text-gray-400 hover:text-gold-light transition-colors">全部</a>
           <span class="text-dark-border mx-0.5">|</span>
           <a href="index.html?category=白酒" class="category-tag px-3 py-1.5 rounded-full text-sm border border-transparent text-gray-400 hover:text-gold-light transition-colors">白酒</a>
           <a href="index.html?category=红酒" class="category-tag px-3 py-1.5 rounded-full text-sm border border-transparent text-gray-400 hover:text-gold-light transition-colors">红酒</a>
@@ -366,14 +367,14 @@
           </p>
 
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="#products" class="btn-amber text-dark font-bold px-10 py-3.5 rounded-full text-base tracking-wider
+            <a href="index.html?category=全部" class="btn-amber text-dark font-bold px-10 py-3.5 rounded-full text-base tracking-wider
                            shadow-lg shadow-gold/20 flex items-center gap-2 no-underline">
               立即选购
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
               </svg>
             </a>
-            <a href="#products" class="btn-outline-gold text-gold-light px-8 py-3.5 rounded-full text-base tracking-wider
+            <a href="index.html?category=全部" class="btn-outline-gold text-gold-light px-8 py-3.5 rounded-full text-base tracking-wider
                            flex items-center gap-2 no-underline">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -910,11 +911,13 @@
 
       if (category) {
         if (products) products.style.display = 'block';
-        cards.forEach(function(card) {
-          if (card.dataset.category !== category) {
-            card.classList.add('hidden-card');
-          }
-        });
+        if (category !== '全部') {
+          cards.forEach(function(card) {
+            if (card.dataset.category !== category) {
+              card.classList.add('hidden-card');
+            }
+          });
+        }
         if (products) products.scrollIntoView();
       } else {
         if (products) products.style.display = 'none';
