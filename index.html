@@ -902,6 +902,14 @@
           </a>
 
           </div>
+
+          <!-- Collapse Button -->
+          <div class="text-center mt-10" id="collapseWrap">
+            <button id="collapseBtn" class="btn-outline-gold text-gold-light px-10 py-3 rounded-full text-sm tracking-widest
+                           hover:text-white transition-colors">
+              收起 ↑
+            </button>
+          </div>
         </div>
 
       </div>
@@ -1108,12 +1116,20 @@
         if (products) products.style.display = 'none';
       }
 
-      // Load more button
+      // Load more / collapse buttons
       var loadMoreBtn = document.getElementById('loadMoreBtn');
+      var collapseBtn = document.getElementById('collapseBtn');
       if (loadMoreBtn) {
         loadMoreBtn.addEventListener('click', function() {
           if (extraProducts) extraProducts.style.display = 'block';
           if (loadMoreWrap) loadMoreWrap.style.display = 'none';
+        });
+      }
+      if (collapseBtn) {
+        collapseBtn.addEventListener('click', function() {
+          if (extraProducts) extraProducts.style.display = 'none';
+          if (loadMoreWrap) loadMoreWrap.style.display = 'block';
+          if (products) products.scrollIntoView();
         });
       }
     })();
